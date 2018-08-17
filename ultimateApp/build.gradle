@@ -1,0 +1,25 @@
+subprojects {
+apply plugin: "java"
+
+repositories {
+       mavenCentral()
+}
+
+dependencies {
+	testCompile "junit:junit:4.7"
+}
+
+
+ test {
+	jvmArgs "-Xmx512M"
+     }
+}
+
+
+configure(nonWebProjects()) {
+   jar.manifest.attributes Implementor: "Gradle Inc."
+}
+
+def nonWebProjects() {
+  subprojects.findAll { !it.name.startsWith("web") }
+}
